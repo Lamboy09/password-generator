@@ -1,5 +1,6 @@
 # Password Generator Project
 import random
+from typing import List
 
 letters = [
     "a",
@@ -58,14 +59,22 @@ letters = [
 numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 symbols = ["!", "#", "$", "%", "&", "(", ")", "*", "+"]
 
-print("Welcome to the PyPassword Generator!")
-nr_letters = int(input("How many letters would you like in your password?\n"))
-nr_symbols = int(input(f"How many symbols would you like?\n"))
-nr_numbers = int(input(f"How many numbers would you like?\n"))
 
-# Eazy Level - Order not randomised:
-# e.g. 4 letter, 2 symbol, 2 number = JduE&!91
-password_list = []
+def ask_user() -> List[int]:
+    nr_letters = int(input("How many letters would you like in your password?\n"))
+    nr_symbols = int(input(f"How many symbols would you like?\n"))
+    nr_numbers = int(input(f"How many numbers would you like?\n"))
+
+    return [nr_letters, nr_symbols, nr_numbers]
+
+
+def password_generator(nr_letters: int, nr_symbols: int, nr_numbers: int) -> str:
+
+    print("Welcome to the PyPassword Generator!")
+
+    # Eazy Level - Order not randomised:
+    # e.g. 4 letter, 2 symbol, 2 number = JduE&!91
+    password_list = []
 
     for char in range(nr_letters):
         password_list.append(random.choice(letters))
@@ -78,9 +87,9 @@ password_list = []
 
     random.shuffle(password_list)
 
-password = ""
+    password = ""
 
-for char in password_list:
-    password += char
+    for char in password_list:
+        password += char
 
-print(password)
+    return password
